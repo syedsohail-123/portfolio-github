@@ -1,53 +1,75 @@
 "use client";
 
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { Mail, Linkedin, Phone, Github } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Mail, Linkedin, Phone, Github, Terminal as TerminalIcon, Calendar, Send } from 'lucide-react';
+import Globe from './Globe';
+import Toast from './Toast';
 import styles from './Contact.module.css';
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
-    const [status, setStatus] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+    const [isToastVisible, setIsToastVisible] = useState(false);
+    
+    // Terminal Form State
+    const [history, setHistory] = useState([
+        { text: "Welcome to the interactive contact terminal.", type: "system" },
+        { text: "Initiating communication sequence...", type: "system" },
+        { text: "> What is your name?", type: "prompt" }
+    ]);
+    const [input, setInput] = useState('');
+    const [step, setStep] = useState(0); // 0: name, 1: email, 2: message
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    
+    const inputRef = useRef(null);
+    const bottomRef = useRef(null);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+    const showToast = (message) => {
+        setToastMessage(message);
+        setIsToastVisible(true);
+        setTimeout(() => setIsToastVisible(false), 3000);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setStatus('');
+    const handleCopy = (text, label) => {
+        navigator.clipboard.writeText(text);
+        showToast(`${label} copied to clipboard! ✅`);
+    };
 
-        try {
-            // Replace these with your EmailJS credentials
-            // Get them from https://www.emailjs.com/
-            await emailjs.send(
-                'YOUR_SERVICE_ID', // Replace with your service ID
-                'YOUR_TEMPLATE_ID', // Replace with your template ID
-                {
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    message: formData.message,
-                    to_email: 'ahmedsyedsohail776@gmail.com'
-                },
-                'YOUR_PUBLIC_KEY' // Replace with your public key
-            );
+    useEffect(() => {
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [history]);
 
-            setStatus('success');
-            setFormData({ name: '', email: '', message: '' });
-        } catch (error) {
-            console.error('Email send error:', error);
-            setStatus('error');
-        } finally {
-            setLoading(false);
+    const handleCommand = (e) => {
+        if (e.key === 'Enter' && input.trim() !== '') {
+            const val = input.trim();
+            const newHistory = [...history, { text: val, type: "input" }];
+            
+            if (step === 0) {
+                setFormData({ ...formData, name: val });
+                newHistory.push({ text: `> Hello ${val}! What is your email address?`, type: "prompt" });
+                setStep(1);
+            } else if (step === 1) {
+                setFormData({ ...formData, email: val });
+                newHistory.push({ text: "> Excellent. Type your message below and hit Enter to send:", type: "prompt" });
+                setStep(2);
+            } else if (step === 2) {
+                setFormData({ ...formData, message: val });
+                newHistory.push({ text: "> Sending message through secure channels...", type: "system" });
+                
+                // Simulate sending delay for now
+                setTimeout(() => {
+                    setHistory(prev => [
+                        ...prev,
+                        { text: "SUCCESS: Message delivered to Syed Sohail Ahmed! 🎉", type: "success" },
+                        { text: "> Session closed. You may close this terminal.", type: "system" }
+                    ]);
+                    setStep(3); // done
+                }, 1500);
+            }
+            
+            setHistory(newHistory);
+            setInput('');
         }
     };
 
@@ -55,85 +77,97 @@ export default function Contact() {
         <section id="contact" className={styles.contactSection}>
             <h2 className={styles.title}>Get In Touch</h2>
             <p className={styles.subtitle}>
-                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                Interact with the terminal to send a message, or copy my contact details below.
             </p>
 
-            <div className={styles.contactContainer}>
-                <a href="mailto:ahmedsyedsohail776@gmail.com" className={styles.contactCard}>
-                    <Mail className={styles.icon} size={24} />
-                    <span className={styles.label}>Email</span>
-                    <span className={styles.value}>ahmedsyedsohail776@gmail.com</span>
-                </a>
+            <div className={styles.mainGrid}>
+                {/* Left Column: Contact Cards & Globe */}
+                <div className={styles.leftColumn}>
+                    <div className={styles.globeWrapper}>
+                        <Globe />
+                    </div>
 
-                <a href="https://www.linkedin.com/in/-syedsohailahmed/" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
-                    <Linkedin className={styles.icon} size={24} />
-                    <span className={styles.label}>LinkedIn</span>
-                    <span className={styles.value}>Connect with me</span>
-                </a>
+                    <div className={styles.contactContainer}>
+                        <button onClick={() => handleCopy('ahmedsyedsohail776@gmail.com', 'Email')} className={styles.contactCard}>
+                            <Mail className={styles.icon} size={24} />
+                            <div className={styles.cardContent}>
+                                <span className={styles.label}>Email</span>
+                                <span className={styles.value}>ahmedsyedsohail776@gmail.com</span>
+                            </div>
+                        </button>
 
-                <a href="tel:9390634592" className={styles.contactCard}>
-                    <Phone className={styles.icon} size={24} />
-                    <span className={styles.label}>Phone</span>
-                    <span className={styles.value}>+91 9390634592</span>
-                </a>
+                        <button onClick={() => handleCopy('+919390634592', 'Phone number')} className={styles.contactCard}>
+                            <Phone className={styles.icon} size={24} />
+                            <div className={styles.cardContent}>
+                                <span className={styles.label}>Phone</span>
+                                <span className={styles.value}>+91 9390634592</span>
+                            </div>
+                        </button>
 
-                <a href="https://github.com/syedsohail-123" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
-                    <Github className={styles.icon} size={24} />
-                    <span className={styles.label}>GitHub</span>
-                    <span className={styles.value}>Check my code</span>
-                </a>
+                        <a href="https://www.linkedin.com/in/-syedsohailahmed/" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+                            <Linkedin className={styles.icon} size={24} />
+                            <div className={styles.cardContent}>
+                                <span className={styles.label}>LinkedIn</span>
+                                <span className={styles.value}>Connect with me</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                {/* Right Column: Terminal Form & Calendly Placeholder */}
+                <div className={styles.rightColumn}>
+                    <div className={styles.terminalContainer} onClick={() => step < 3 && inputRef.current?.focus()}>
+                        <div className={styles.terminalHeader}>
+                            <div className={styles.macButtons}>
+                                <span className={styles.close}></span>
+                                <span className={styles.minimize}></span>
+                                <span className={styles.maximize}></span>
+                            </div>
+                            <div className={styles.terminalTitle}>
+                                <TerminalIcon size={14} /> contact.exe
+                            </div>
+                        </div>
+                        
+                        <div className={styles.terminalBody}>
+                            {history.map((line, idx) => (
+                                <div key={idx} className={`${styles.line} ${styles[line.type]}`}>
+                                    {line.text}
+                                </div>
+                            ))}
+                            {step < 3 && (
+                                <div className={styles.inputContainer}>
+                                    <span className={styles.inputPrompt}>_</span>
+                                    <input
+                                        ref={inputRef}
+                                        type="text"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyDown={handleCommand}
+                                        className={styles.inputField}
+                                        spellCheck="false"
+                                        autoComplete="off"
+                                    />
+                                </div>
+                            )}
+                            <div ref={bottomRef} />
+                        </div>
+                    </div>
+
+                    {/* Calendly Placeholder */}
+                    <div className={styles.calendlyPlaceholder}>
+                        <Calendar className={styles.calendlyIcon} size={32} />
+                        <div className={styles.calendlyInfo}>
+                            <h4>Want to chat directly?</h4>
+                            <p>Book a 15-minute introductory meeting with me via Calendly.</p>
+                            <button className={styles.calendlyBtn}>
+                                Schedule Meeting
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <form className={styles.contactForm} onSubmit={handleSubmit}>
-                <h3 className={styles.formTitle}>Send Me a Message</h3>
-
-                <div className={styles.formGroup}>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className={styles.input}
-                    />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className={styles.input}
-                    />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <textarea
-                        name="message"
-                        placeholder="Your Message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows="5"
-                        className={styles.textarea}
-                    />
-                </div>
-
-                <button type="submit" disabled={loading} className={styles.submitBtn}>
-                    {loading ? 'Sending...' : 'Send Message'}
-                </button>
-
-                {status === 'success' && (
-                    <p className={styles.successMessage}>Message sent successfully! I'll get back to you soon.</p>
-                )}
-                {status === 'error' && (
-                    <p className={styles.errorMessage}>Failed to send message. Please try emailing me directly.</p>
-                )}
-            </form>
+            <Toast message={toastMessage} isVisible={isToastVisible} onClose={() => setIsToastVisible(false)} />
         </section>
     );
 }
