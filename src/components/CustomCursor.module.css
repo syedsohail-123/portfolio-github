@@ -1,0 +1,35 @@
+.customCursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    opacity: 0;
+}
+
+.customCursor.visible {
+    opacity: 1;
+}
+
+.customCursor.clicking {
+    transform: scale(0.8);
+    background-color: var(--primary);
+}
+
+.cursorDot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+}
+
+.cursorDot.clicking {
+    transform: scale(1.5);
+}
