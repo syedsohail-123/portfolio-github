@@ -19,31 +19,31 @@ const certificationsData = [
     {
         name: "AWS Certified Cloud Practitioner",
         issuer: "Amazon Web Services (AWS)",
-        image: "/images/aws-cloud-practitioner.png",
+        image: "./images/aws-cloud-practitioner.png",
         verifyLink: "https://www.credly.com/users/syed-sohail-ahmed.247effe5" // To be updated by user
     },
     {
         name: "AWS re/Start Graduate",
         issuer: "Amazon Web Services (AWS)",
-        image: "/images/aws-restart-graduate.png",
+        image: "./images/aws-restart-graduate.png",
         verifyLink: "https://www.credly.com/users/syed-sohail-ahmed.247effe5"
     },
     {
         name: "AWS Cloud Quest: Cloud Practitioner",
         issuer: "Amazon Web Services (AWS)",
-        image: "/images/aws-cloud-quest.png",
+        image: "./images/aws-cloud-quest.png",
         verifyLink: "https://www.credly.com/users/syed-sohail-ahmed.247effe5"
     },
     {
         name: "AWS Knowledge: Serverless",
         issuer: "Amazon Web Services (AWS)",
-        image: "/images/aws-serverless.png",
+        image: "./images/aws-serverless.png",
         verifyLink: "https://www.credly.com/users/syed-sohail-ahmed.247effe5"
     },
     {
         name: "AWS Security Champion",
         issuer: "Amazon Web Services (AWS)",
-        image: "/images/aws-security-champion.png",
+        image: "./images/aws-security-champion.png",
         verifyLink: "https://www.credly.com/users/syed-sohail-ahmed.247effe5"
     }
 ];

@@ -6,6 +6,7 @@ import { Rocket, Brain, Target, Sparkles, Activity } from 'lucide-react';
 import { useRef } from 'react';
 import AudioPlayer from './AudioPlayer';
 import MagneticButton from './MagneticButton';
+import sohailImg from '../../public/assests/Sohail-2.jpeg';
 import styles from './About.module.css';
 
 const fadeInUp = {
@@ -135,7 +136,7 @@ export default function About() {
                         {/* The continuous levitation animate overrides the whileInView transition on y, so we use initial scale/opacity instead. */}
                         <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
                             <img 
-                                src="./assests/Sohail-2.jpeg" 
+                                src={sohailImg.src}
                                 alt="Syed Sohail Ahmed working" 
                                 className={styles.aboutImage}
                             />

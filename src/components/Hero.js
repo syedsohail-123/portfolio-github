@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import { X } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import sohailImg from '../../public/assests/sohail-1.jpeg';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -23,7 +24,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, rotate: 2 }}
             >
                 <Image
-                    src="/assests/sohail-1.jpeg"
+                    src={sohailImg}
                     alt="Syed Sohail Ahmed"
                     width={180}
                     height={180}
