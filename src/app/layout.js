@@ -27,7 +27,7 @@ export const metadata = {
     siteName: "Syed Sohail Ahmed Portfolio",
     images: [
       {
-        url: "/assests/sohail-1.jpeg",
+        url: "./assests/sohail-1.jpeg",
         width: 800,
         height: 600,
         alt: "Syed Sohail Ahmed - Backend Developer",
@@ -40,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Syed Sohail Ahmed | Backend Developer",
     description: "Full-Stack Developer specializing in Node.js, Python, and AWS.",
-    images: ["/assests/sohail-1.jpeg"],
+    images: ["./assests/sohail-1.jpeg"],
   },
 };
 

@@ -135,7 +135,7 @@ export default function About() {
                         {/* The continuous levitation animate overrides the whileInView transition on y, so we use initial scale/opacity instead. */}
                         <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
                             <img 
-                                src="/assests/Sohail-2.jpeg" 
+                                src="./assests/Sohail-2.jpeg" 
                                 alt="Syed Sohail Ahmed working" 
                                 className={styles.aboutImage}
                             />

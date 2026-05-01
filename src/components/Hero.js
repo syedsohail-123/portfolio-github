@@ -68,7 +68,7 @@ export default function Hero() {
                 <button onClick={() => setIsPreviewOpen(true)} className={styles.downloadBtn}>
                     Preview CV
                 </button>
-                <a href="/assests/Resume (1).pdf" download="Syed_Sohail_CV.pdf" className={styles.secondaryBtn}>
+                <a href="./assests/Resume (1).pdf" download="Syed_Sohail_CV.pdf" className={styles.secondaryBtn}>
                     Download CV
                 </a>
             </div>
@@ -93,7 +93,7 @@ export default function Hero() {
                                 <X size={24} />
                             </button>
                             <iframe 
-                                src="/assests/Resume (1).pdf#toolbar=0" 
+                                src="./assests/Resume (1).pdf#toolbar=0" 
                                 className={styles.pdfIframe}
                                 title="CV Preview"
                             />
