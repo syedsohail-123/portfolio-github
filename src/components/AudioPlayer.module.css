@@ -1,0 +1,65 @@
+.audioContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-radius: 30px;
+    width: fit-content;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.playButton {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.playButton:hover {
+    transform: scale(1.05);
+    background: var(--primary-hover);
+}
+
+.playButton.playing {
+    background: #ff5f56;
+}
+
+.visualizer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volIcon {
+    color: var(--secondary);
+}
+
+.label {
+    font-size: 0.85rem;
+    color: var(--foreground);
+    font-weight: 500;
+}
+
+.bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 14px;
+    margin-left: 0.5rem;
+}
+
+.bar {
+    width: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+}

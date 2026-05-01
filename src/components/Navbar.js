@@ -1,38 +1,59 @@
 "use client";
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useNavigation } from '../context/NavigationContext';
+import MagneticButton from './MagneticButton';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
+    const { activeTab, setActiveTab } = useNavigation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+        setIsMenuOpen(false);
+        window.scrollTo(0, 0); // Scroll to top when changing tabs
+    };
+
+    const navItems = [
+        { id: 'home', label: 'Home' },
+        { id: 'about', label: 'About' },
+        { id: 'skills', label: 'Skills' },
+        { id: 'experience', label: 'Experience' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'credentials', label: 'Credentials' },
+        { id: 'playground', label: 'Playground' },
+        { id: 'contact', label: 'Contact' },
+    ];
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.logo}>
-                <Link href="/">Portfolio</Link>
+                <button onClick={() => handleTabClick('home')} className={styles.logoBtn}>Portfolio</button>
             </div>
 
             <ul className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
-                <li><Link href="#about" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-                <li><Link href="#about-detailed" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>About</Link></li>
-                <li><Link href="#skills" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Skills</Link></li>
-                <li><Link href="#experience" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Experience</Link></li>
-                <li><Link href="#projects" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Projects</Link></li>
-                <li><Link href="#education" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Education</Link></li>
-                <li><Link href="#certifications" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Certifications</Link></li>
-                <li><Link href="#contact" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+                {navItems.map(item => (
+                    <li key={item.id}>
+                        <MagneticButton 
+                            className={`${styles.navLink} ${activeTab === item.id ? styles.activeTab : ''}`}
+                            onClick={() => handleTabClick(item.id)}
+                        >
+                            {item.label}
+                        </MagneticButton>
+                    </li>
+                ))}
             </ul>
 
             <div className={styles.actions}>
-                <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
+                <MagneticButton className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
                     {theme === 'light' ? (
                         <>
                             <Moon size={18} />
@@ -44,7 +65,7 @@ export default function Navbar() {
                             <span>Light</span>
                         </>
                     )}
-                </button>
+                </MagneticButton>
                 <button className={styles.mobileMenuBtn} onClick={toggleMenu} aria-label="Toggle Menu">
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>

@@ -40,6 +40,16 @@ export default function CustomCursor() {
 
     return (
         <>
+            {/* Flashlight Effect Background */}
+            {isVisible && (
+                <div 
+                    className={styles.flashlight}
+                    style={{
+                        background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255, 153, 0, 0.05), transparent 40%)`
+                    }}
+                />
+            )}
+            
             <div
                 className={`${styles.customCursor} ${isVisible ? styles.visible : ''} ${isClicking ? styles.clicking : ''}`}
                 style={{

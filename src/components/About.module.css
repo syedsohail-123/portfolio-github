@@ -45,9 +45,42 @@
 }
 
 .intro {
-    text-align: center;
-    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1000px;
     margin: 0 auto 4rem;
+    text-align: left;
+}
+
+.introText {
+    flex: 1;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.aboutImageContainer {
+    flex-shrink: 0;
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 4px solid var(--card-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: var(--primary);
+    animation: float 4s ease-in-out infinite;
+}
+
+.aboutImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .greeting {
@@ -83,18 +116,213 @@
 }
 
 .content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    margin-bottom: 4rem;
+}
+
+.statsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.statCard {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.statNumber {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+}
+
+.statLabel {
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
 }
 
 .card {
     background-color: var(--card-bg);
-    border-radius: 16px;
     padding: 2rem;
+    border-radius: 12px;
     border: 1px solid var(--border);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fullWidthCard {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 1. Cyberpunk Glitch Text */
+.glitchName {
+    position: relative;
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.glitchName::before,
+.glitchName::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+}
+
+.glitchName::before {
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    animation: glitchAnim 2s infinite linear alternate-reverse;
+    opacity: 0;
+}
+
+.glitchName::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff00ff;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    animation: glitchAnim2 3s infinite linear alternate-reverse;
+    opacity: 0;
+}
+
+.glitchName:hover::before,
+.glitchName:hover::after {
+    opacity: 1;
+}
+
+@keyframes glitchAnim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitchAnim2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
+}
+
+/* 2. Interactive Spotlight */
+.introText {
+    flex: 1;
+    position: relative;
+    padding: 2rem;
+    border-radius: 16px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.spotlightOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 153, 0, 0.08),
+        transparent 40%
+    );
+    z-index: 0;
+    transition: background 0.3s ease;
+}
+
+.introContent {
+    position: relative;
+    z-index: 1;
+}
+
+/* 3. Liquid Image Distortion */
+.aboutImageContainer {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 153, 0, 0.2);
+    transition: all 0.5s ease;
+    animation: liquidMorph 8s ease-in-out infinite;
+}
+
+.aboutImageContainer:hover {
+    animation-play-state: paused;
+    border-radius: 50%;
+    transform: scale(1.05);
+}
+
+@keyframes liquidMorph {
+    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+    75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+    100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+}
+
+/* 4. Peel Reveal Overlay */
+.peelOverlay {
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 10;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.peelText {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* 5. SVG Drawing Background */
+.svgBackground {
+    position: absolute;
+    top: 0;
+    right: -10%;
+    width: 60%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+.svgPath {
+    stroke: var(--primary);
+    stroke-width: 2;
+    fill: none;
 }
 
 .card:hover {
@@ -196,6 +424,17 @@
     .wave {
         font-size: 2rem;
     }
+    
+    .intro {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .aboutImageContainer {
+        width: 200px;
+        height: 200px;
+    }
 
     .greeting {
         font-size: 1.5rem;
@@ -203,7 +442,7 @@
 
     .description {
         font-size: 1rem;
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     .content {

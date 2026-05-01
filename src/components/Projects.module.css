@@ -108,6 +108,24 @@
     flex-grow: 1;
 }
 
+.featureToggleBtn {
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    margin-top: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.featureToggleBtn:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
 .links {
     display: flex;
     gap: 1rem;
@@ -115,12 +133,19 @@
 }
 
 .link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: 600;
-    text-align: center;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.link:hover {
+    transform: translateY(-2px);
 }
 
 .demoLink {
@@ -140,4 +165,78 @@
 
 .githubLink:hover {
     border-color: var(--foreground);
+}
+
+.archLink {
+    background-color: var(--card-bg);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.archLink:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modalContent {
+    position: relative;
+    width: 95%;
+    max-width: 1200px;
+    height: 90vh;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--background);
+}
+
+.modalHeader h3 {
+    margin: 0;
+    color: var(--foreground);
+    font-size: 1.25rem;
+}
+
+.closeBtn {
+    background: transparent;
+    color: var(--foreground);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: rotate(90deg);
 }

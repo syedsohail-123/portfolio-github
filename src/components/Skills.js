@@ -1,7 +1,7 @@
 import {
     FaNodeJs, FaReact, FaPython, FaHtml5, FaCss3Alt, FaAws, FaDocker, FaLinux, FaGitAlt, FaJenkins, FaGithub
 } from 'react-icons/fa';
-import { SiNextdotjs, SiDjango, SiFastapi, SiExpress, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiFirebase, SiKubernetes } from 'react-icons/si';
+import { SiNextdotjs, SiDjango, SiFastapi, SiExpress, SiTailwindcss, SiMongodb, SiPostgresql, SiMysql, SiFirebase, SiKubernetes, SiFlutter, SiNestjs } from 'react-icons/si';
 import { VscAzureDevops } from 'react-icons/vsc'; // Using VscAzureDevops as a fallback or generic tool icon if needed, but mostly covered.
 import styles from './Skills.module.css';
 
@@ -10,9 +10,10 @@ const skillsData = [
         category: "Backend",
         items: [
             { name: "Node.js", icon: <FaNodeJs /> },
+            { name: "Nest.js", icon: <SiNestjs /> },
+            { name: "Express", icon: <SiExpress /> },
             { name: "Django", icon: <SiDjango /> },
             { name: "FastAPI", icon: <SiFastapi /> },
-            { name: "Express", icon: <SiExpress /> },
             { name: "Python", icon: <FaPython /> }
         ]
     },
@@ -24,6 +25,12 @@ const skillsData = [
             { name: "HTML", icon: <FaHtml5 /> },
             { name: "CSS", icon: <FaCss3Alt /> },
             { name: "Tailwind", icon: <SiTailwindcss /> }
+        ]
+    },
+    {
+        category: "Mobile",
+        items: [
+            { name: "Flutter", icon: <SiFlutter /> }
         ]
     },
     {

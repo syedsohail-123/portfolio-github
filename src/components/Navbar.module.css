@@ -25,14 +25,38 @@
 }
 
 .navLink {
+    background: transparent;
+    border: none;
+    color: var(--secondary);
+    text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
+    transition: color 0.3s ease;
     cursor: pointer;
-    transition: color 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 
 .navLink:hover {
     color: var(--primary);
+    background-color: var(--card-bg);
+}
+
+.activeTab {
+    color: var(--primary);
+    background-color: var(--card-bg);
+    font-weight: 600;
+}
+
+.logoBtn {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
 }
 
 .actions {

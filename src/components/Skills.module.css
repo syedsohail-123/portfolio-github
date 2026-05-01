@@ -18,6 +18,21 @@
     margin: 0 auto;
 }
 
+.galaxyWrapper {
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--foreground);
+}
+
 .categoryCard {
     background-color: var(--card-bg);
     padding: 2rem;
