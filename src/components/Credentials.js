@@ -8,7 +8,7 @@ import { motion as fmotion } from 'framer-motion';
 
 const educationData = [
     {
-        degree: "Bachelor of Technology in Computer Science",
+        degree: "Electrical and Electronics Engineering",
         college: "Deccan College Of Engineering and Technology",
         year: "2019 - 2023",
         description: "Specialized in software engineering, database management, and web technologies. Completed major project on IoT Health Monitoring."
