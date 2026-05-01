@@ -5,7 +5,7 @@ import styles from './Education.module.css';
 
 const educationData = [
     {
-        degree: "Bachelor of Technology in Computer Science",
+        degree: "Bachelor of Technology in Electrical and Electronics Engineering",
         college: "Deccan College Of Engineering and Technology",
         year: "2019 - 2023"
     }
