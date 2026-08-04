@@ -23,7 +23,7 @@ export default function Hero() {
                 playsInline 
                 className={styles.bgVideo}
             >
-                <source src="/assests/ai_video_generation_prompt.mp4" type="video/mp4" />
+                <source src="./assests/ai_video_generation_prompt.mp4" type="video/mp4" />
             </video>
             <div className={styles.videoOverlay}></div>
             
