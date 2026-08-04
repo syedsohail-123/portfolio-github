@@ -14,23 +14,6 @@ export default function AudioPlayer({ textToSpeak }) {
     useEffect(() => {
         if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
             setSpeechSynthesis(window.speechSynthesis);
-            const msg = new SpeechSynthesisUtterance(textToSpeak);
-            
-            // Try to find an English voice, preferably male/neutral
-            const voices = window.speechSynthesis.getVoices();
-            const preferredVoice = voices.find(v => v.lang.includes('en-US') && v.name.includes('Google')) || voices[0];
-            if (preferredVoice) {
-                msg.voice = preferredVoice;
-            }
-            
-            msg.rate = 0.9; // Slightly slower for better clarity
-            msg.pitch = 1.0;
-            
-            msg.onend = () => {
-                setIsPlaying(false);
-            };
-            
-            setUtterance(msg);
         } else {
             setIsSupported(false);
         }
@@ -40,19 +23,67 @@ export default function AudioPlayer({ textToSpeak }) {
                 window.speechSynthesis.cancel();
             }
         };
-    }, [textToSpeak]);
+    }, []);
 
     const togglePlay = () => {
-        if (!isSupported || !speechSynthesis || !utterance) return;
+        if (!isSupported || !speechSynthesis) return;
 
         if (isPlaying) {
             speechSynthesis.cancel();
             setIsPlaying(false);
         } else {
-            speechSynthesis.speak(utterance);
+            const msg = new SpeechSynthesisUtterance(textToSpeak);
+            
+            // Get available voices (they might load asynchronously, so we fetch them on click)
+            const voices = speechSynthesis.getVoices();
+            
+            // Keywords to identify male and premium voices
+            const maleKeywords = ['male', 'guy', 'david', 'mark', 'alex', 'daniel', 'brian', 'arthur', 'george', 'ryan', 'aaron'];
+            const premiumKeywords = ['online', 'premium', 'neural', 'natural'];
+            const femaleKeywords = ['female', 'zira', 'siri', 'google', 'hazel', 'samantha', 'victoria'];
+
+            let bestVoice = voices[0];
+            let highestScore = -999;
+
+            voices.forEach(v => {
+                let score = 0;
+                const lowerName = v.name.toLowerCase();
+                
+                // Prefer English
+                if (v.lang.includes('en')) score += 10;
+                
+                // Highly reward male names
+                if (maleKeywords.some(kw => lowerName.includes(kw))) score += 50;
+                
+                // Highly reward cloud/premium voices (often available in Edge/Safari)
+                if (premiumKeywords.some(kw => lowerName.includes(kw))) score += 30;
+                
+                // Penalize female/default voices
+                if (femaleKeywords.some(kw => lowerName.includes(kw))) score -= 50;
+
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestVoice = v;
+                }
+            });
+
+            if (bestVoice) {
+                msg.voice = bestVoice;
+            }
+            
+            msg.rate = 0.95; // Slightly slower for clearer articulation
+            msg.pitch = 0.9; // Slightly deeper pitch for a more male/professional tone
+            
+            msg.onend = () => {
+                setIsPlaying(false);
+            };
+
+            speechSynthesis.speak(msg);
             setIsPlaying(true);
         }
     };
+
+
 
     if (!isSupported) return null;
 

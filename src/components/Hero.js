@@ -16,8 +16,20 @@ export default function Hero() {
 
     return (
         <section id="about" className={styles.hero}>
-            <motion.div 
-                className={styles.imageWrapper}
+            <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className={styles.bgVideo}
+            >
+                <source src="/assests/ai_video_generation_prompt.mp4" type="video/mp4" />
+            </video>
+            <div className={styles.videoOverlay}></div>
+            
+            <div className={styles.heroContent}>
+                <motion.div 
+                    className={styles.imageWrapper}
                 initial={{ opacity: 0, scale: 0.5, y: -20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -102,6 +114,7 @@ export default function Hero() {
                     </motion.div>
                 )}
             </AnimatePresence>
+            </div>
         </section>
     );
 }
