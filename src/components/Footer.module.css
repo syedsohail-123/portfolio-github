@@ -1,0 +1,36 @@
+.footer {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.link {
+    color: var(--secondary);
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--primary);
+}
+
+.copyright {
+    color: var(--secondary);
+    font-size: 0.9rem;
+}

@@ -1,0 +1,346 @@
+.aboutSection {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--background) 0%, var(--card-bg) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bentoGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.bentoTile {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.bentoTile:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Specific Tiles */
+.bioTile {
+    grid-column: span 2;
+    grid-row: span 2;
+    justify-content: center;
+}
+
+.terminalTile {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.audioTile {
+    grid-column: span 1;
+    grid-row: span 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.locationTile {
+    grid-column: span 1;
+    grid-row: span 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.statsTile {
+    grid-column: span 4;
+    grid-row: span 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+}
+
+/* Bio Content */
+.bioHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.aboutImageContainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    flex-shrink: 0;
+}
+
+.glitchName {
+    font-size: 2rem;
+    color: var(--foreground);
+    margin: 0 0 0.25rem 0;
+    font-weight: 700;
+}
+
+.title {
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.bioText {
+    color: var(--secondary);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* Terminal */
+.terminalContainer {
+    background-color: #020617;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.terminalHeader {
+    background-color: #0f172a;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.terminalButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.redDot, .yellowDot, .greenDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.redDot { background-color: #ef4444; }
+.yellowDot { background-color: #f59e0b; }
+.greenDot { background-color: #10b981; }
+
+.terminalTab {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.terminalIcon {
+    margin-left: auto;
+    color: #94a3b8;
+}
+
+.terminalBody {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+}
+
+.terminalOutput {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.termLine {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.termLine p {
+    margin: 0;
+}
+
+.system { color: #94a3b8; }
+.cmd { color: #38bdf8; font-weight: 600; }
+.output { color: #10b981; white-space: pre-wrap; padding-left: 1rem; border-left: 2px solid rgba(16, 185, 129, 0.2); }
+
+.terminalControls {
+    margin-top: auto;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+.runPrompt {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.commandBtns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.cmdBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cmdBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Audio Tile */
+.audioWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.audioLabel {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Location Tile */
+.locationContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.locationIcon {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.locationText {
+    color: var(--secondary);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.locationCity {
+    color: var(--foreground);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.pulseDot {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: #10b981;
+    border-radius: 50%;
+}
+
+.pulseDot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+/* Stats */
+.statCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.3s ease;
+    cursor: crosshair;
+    backdrop-filter: blur(10px);
+}
+
+.statCard:hover {
+    border-color: var(--primary);
+}
+
+.statNumber {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+}
+
+.statLabel {
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .bentoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .statsTile {
+        grid-column: span 2;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .bentoGrid {
+        grid-template-columns: 1fr;
+    }
+    .bioTile, .terminalTile, .audioTile, .locationTile, .statsTile {
+        grid-column: span 1;
+    }
+    .statsTile {
+        grid-template-columns: 1fr;
+    }
+}

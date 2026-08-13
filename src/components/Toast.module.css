@@ -1,0 +1,22 @@
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) !important; /* Framer handles other transforms, but center it horizontally */
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    pointer-events: none;
+    color: var(--foreground);
+    font-weight: 500;
+}
+
+.icon {
+    color: #27c93f;
+}

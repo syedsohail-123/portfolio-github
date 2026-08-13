@@ -1,0 +1,141 @@
+.skillsSection {
+    padding: 6rem 2rem;
+    background-color: var(--background);
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--foreground);
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+/* Tabs */
+.tabsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.tabBtn {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+.tabBtn:hover {
+    color: var(--foreground);
+}
+
+.activeTab {
+    color: white;
+}
+
+.activeTabBackground {
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    border-radius: 999px;
+    z-index: -1;
+}
+
+/* Skills Grid */
+.skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Apple Style Glow Cards */
+.skillCard {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    position: relative;
+    padding: 2px; /* Border thickness */
+    overflow: hidden;
+    cursor: default;
+}
+
+.skillCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+        400px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.2),
+        transparent 40%
+    );
+    z-index: 1;
+}
+
+.skillCard:hover::before {
+    opacity: 1;
+}
+
+.skillCardContent {
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 14px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    z-index: 2;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skillCard:hover .skillCardContent {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.skillCard:hover .icon {
+    transform: scale(1.1);
+}
+
+.name {
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .skillsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .icon {
+        font-size: 2.5rem;
+    }
+}
