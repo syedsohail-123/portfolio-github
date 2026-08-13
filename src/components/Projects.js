@@ -25,18 +25,19 @@ const projectsData = [
         github: "https://github.com/syedsohail-123/flostat-dashbaord.git"
     },
     {
-        name: "Health Monitor Project",
-        category: "IoT",
-        techStack: ["Python", "IoT", "Data Analytics", "Cloud"],
-        description: "An intelligent health monitoring system designed to track and analyze vital health metrics for proactive healthcare.",
+        name: "GitHub Code Analyzer",
+        category: "Full Stack",
+        techStack: ["Next.js", "FastAPI", "WebSockets", "Tailwind CSS", "AWS Lambda"],
+        description: "A robust GitHub Code Analyzer using Next.js and FastAPI, integrating AI to automatically generate architectural insights and codebase summaries.",
         features: [
-            "Real-time monitoring of health parameters",
-            "Automated alerts for critical thresholds",
-            "Data storage and trend analysis",
-            "Secure user authentication and data privacy"
+            "Architected a Full-Stack AI Tool with Next.js and FastAPI",
+            "Engineered Real-Time Streaming using WebSockets",
+            "Optimized Performance with Caching using SQLAlchemy",
+            "Built a Developer-Centric UI with Tailwind CSS and React Markdown",
+            "Deployed Serverless Infrastructure using AWS Lambda and Terraform"
         ],
-        liveDemo: null,
-        github: "https://github.com/syedsohail-123/heath_monitor_project.git"
+        liveDemo: "https://git-code-analyzer.vercel.app/",
+        github: null
     }
 ];
 

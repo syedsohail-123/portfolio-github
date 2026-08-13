@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://syedsohail.com"),
   title: "Syed Sohail Ahmed | Backend & AWS Specialist",
   description: "Portfolio of Syed Sohail Ahmed - Full-Stack Developer specializing in the MERN Stack, Python, and Cloud technologies. View my projects, skills, and experience.",
   openGraph: {
