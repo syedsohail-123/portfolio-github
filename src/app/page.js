@@ -2,15 +2,20 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation } from '../context/NavigationContext';
+import dynamic from 'next/dynamic';
+
+// Load Hero immediately since it's the first thing users see
 import Hero from "../components/Hero";
-import About from "../components/About";
-import Skills from "../components/Skills";
-import Experience from "../components/Experience";
-import Projects from "../components/Projects";
-import Credentials from "../components/Credentials";
-import Contact from "../components/Contact";
-import Terminal from "../components/Terminal";
-import ApiPlayground from "../components/ApiPlayground";
+
+// Lazy load all other components to massively reduce initial bundle size
+const About = dynamic(() => import("../components/About"));
+const Skills = dynamic(() => import("../components/Skills"));
+const Experience = dynamic(() => import("../components/Experience"));
+const Projects = dynamic(() => import("../components/Projects"));
+const Credentials = dynamic(() => import("../components/Credentials"));
+const Contact = dynamic(() => import("../components/Contact"));
+const Terminal = dynamic(() => import("../components/Terminal"));
+const ApiPlayground = dynamic(() => import("../components/ApiPlayground"));
 
 const fadeTransition = {
   initial: { opacity: 0, y: 20 },
