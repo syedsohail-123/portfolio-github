@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import Typewriter from 'typewriter-effect';
 import { X } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 import sohailImg from '../../public/assests/sohail-1.jpeg';
 import styles from './Hero.module.css';
+import LightRays from './LightRays';
 
 export default function Hero() {
     const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -16,15 +16,18 @@ export default function Hero() {
 
     return (
         <section id="about" className={styles.hero}>
-            <video 
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
-                className={styles.bgVideo}
-            >
-                <source src="./assests/ai_video_generation_prompt.mp4" type="video/mp4" />
-            </video>
+            <LightRays
+                raysOrigin="top-center"
+                raysColor="#00ffff"
+                raysSpeed={1.2}
+                lightSpread={1.5}
+                rayLength={2.5}
+                saturation={1.2}
+                followMouse={true}
+                mouseInfluence={0.08}
+                noiseAmount={0.05}
+                distortion={0.03}
+            />
             <div className={styles.videoOverlay}></div>
             
             <div className={styles.heroContent}>
@@ -54,26 +57,11 @@ export default function Hero() {
                 Syed Sohail Ahmed
             </motion.h1>
             <h2 className={styles.role}>
-                <Typewriter
-                    options={{
-                        strings: [
-                            'Backend Developer',
-                            'AWS Specialist',
-                            'Full Stack Engineer',
-                            'DevOps Enthusiast',
-                            'Cloud Architect'
-                        ],
-                        autoStart: true,
-                        loop: true,
-                        delay: 75,
-                        deleteSpeed: 50,
-                    }}
-                />
+                Full-Stack Developer | AI & Cloud/DevOps Enthusiast
             </h2>
 
             <p className={styles.summary}>
-                Passionate developer with expertise in Node.js, Python, and Cloud technologies.
-                Building scalable microservices and robust backend systems.
+                Passionate developer with expertise in Node.js, Python, and Cloud technologies. Highly curious and eager to integrate Machine Learning logic into modern web development.
             </p>
 
             <div className={styles.ctaButtons}>
